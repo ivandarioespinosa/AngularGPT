@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ChatMessageComponent, MyMessageComponent, TextMessageBoxComponent, TextMessageBoxEvent, TextMessageBoxFileComponent, TextMessageBoxSelectComponent, TextMessageEvent, TypingLoaderComponent } from '@components/index';
 import { Message } from '@interfaces/message.interface';
+import { OpenAiService } from 'app/presentation/services/openai.service';
 
 
 // import { MyMessageComponent } from '@components/chat-bubbles/MyMessage/MyMessage.component';
@@ -28,6 +29,7 @@ export default class OrthographyPageComponent {
 
   public messages = signal<Message[]>([ { text: 'Hola mundo', isGpt: true } ]);
   public isLoading = signal(false);
+  public openAiService = inject( OpenAiService );
 
 
   handleMessage( prompt: string ) {
